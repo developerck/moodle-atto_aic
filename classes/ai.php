@@ -28,12 +28,25 @@ namespace atto_aic;
 
 use moodle_exception;
 
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * PAI class for chatgpt
+ *
+ * @copyright  2023 DeveloperCK <developerck@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class ai {
 
+    /**
+     * API url
+     * @return API URL for chat gpt
+     */
     public const API = 'https://api.openai.com/v1/completions';
 
+    /**
+     *  Generate text based on input
+     * @param string $text
+     * @return string 
+     */
     public static function generate_text($text) {
         global $CFG;
         $message = [["role" => "user", "content" => $text]];
@@ -68,10 +81,17 @@ class ai {
         if (isset($response['error'])) {
             throw new \moodle_exception("error");
         }
-        return self::_format_response($response,  $choice);
+        return self::format_response($response,  $choice);
     }
 
-    private function _format_response($response,  $choice) {
+    /**
+     * format response
+     * @param array $response 
+     * @param int $choice
+     * 
+     * @return string $html
+     */
+    private function format_response($response,  $choice) {
         $tab = [];
         $content = [];
         for ($i = 1; $i <= $choice; $i++) {
