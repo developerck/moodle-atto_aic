@@ -4,7 +4,7 @@ Atto Editor plugin to integrate CHATGPT to create content and available to role 
 
 [developerck.com](developerck.com)
 
-![AnalyticsWidget](https://github.com/developerck/moodle-atto_aic/actions/workflows/ci.yml/badge.svg?branch=main)
+![AIC](https://github.com/developerck/moodle-atto_aic/actions/workflows/ci.yml/badge.svg?branch=main)
 ## License ##
 
 2022 Chandra K <developerck@gmail.com>
