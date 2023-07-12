@@ -19,14 +19,14 @@
  *
  * @package     atto_aic
  * @category    string
- * @copyright   2023 DeveloperCK <developerck@gaicl.com>
+ * @copyright   2023 DeveloperCK <developerck@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $string['aic:use'] = 'Can Use';
-$string['pluginname'] = 'aic content generator';
+$string['pluginname'] = 'AIC content generator';
 $string['header'] = 'Create content through AI';
 $string['apikey'] = 'OpenAI API Key';
 $string['apikeydesc'] = 'The API Key for your OpenAI account';

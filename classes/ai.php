@@ -19,7 +19,7 @@
  *
  * @package     atto_aic
  * @category    string
- * @copyright   2023 DeveloperCK <developerck@gaicl.com>
+ * @copyright   2023 DeveloperCK <developerck@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -92,13 +92,13 @@ class ai
             </div>';
         }
 
-        $html = '
+        $html = '<div class="mx-3">
     <ul class="nav nav-tabs" id="texttabs" role="tablist">
         ' . implode(" ", $tab) . '
     </ul>
 <div class="tab-content" id="aiccontent">
  ' . implode(" ", $content) . '
-</div>';
+</div></div>';
         return $html;
     }
 

@@ -19,7 +19,7 @@
  *
  * @package     atto_aic
  * @category    string
- * @copyright   2023 DeveloperCK <developerck@gaicl.com>
+ * @copyright   2023 DeveloperCK <developerck@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -53,7 +53,6 @@ function atto_aic_params_for_js()
             }
         }
     }
-
     return $params;
 }
 
