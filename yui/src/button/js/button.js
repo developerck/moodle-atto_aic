@@ -36,7 +36,7 @@
  * @extends M.editor_atto.EditorPlugin
  */
 var COMPONENTNAME = 'atto_aic',
-    CSS = {
+    CSSSELSEL = {
         TEXTINPUT: 'atto_aic_textentry',
         INPUTSUBMIT: 'atto_aic_promptentrysubmit',
         RESPONSE: 'atto_aic_response',
@@ -45,24 +45,24 @@ var COMPONENTNAME = 'atto_aic',
 TEMPLATE = '' +
     '<form class="atto_form">' +
     '<div class="row">' +
-    '<div class="mb-1 col-md-12"><div class="alert alert-info">{{get_string "help" component}}</div></div>'+
+    '<div class="mb-1 col-md-12"><div class="alert alert-info">{{get_string "help" component}}</div></div>' +
     '<div class="mb-1 col-md-8">' +
-    '<textarea class="form-control fullwidth text {{CSS.TEXTINPUT}}" type="text" ' +
+    '<textarea class="form-control fullwidth text {{CSSSEL.TEXTINPUT}}" type="text" ' +
     'id="{{elementid}}_atto_aic_prompttext"  placeholder="{{get_string "placeholder" component}}"></textarea>' +
     '</div>' +
     '<div class="mdl-align col-md-4">' +
-    '<button type="button" class="btn btn-secondary  {{CSS.INPUTSUBMIT}}">{{get_string "buttonname" component}}</button>' +
+    '<button type="button" class="btn btn-secondary  {{CSSSEL.INPUTSUBMIT}}">{{get_string "buttonname" component}}</button>' +
     '</div>' +
     '</div><br/>' +
-    '<div class=" row {{CSS.RESPONSE}}"></div>' +
+    '<div class=" row {{CSSSEL.RESPONSE}}"></div>' +
     '</form>'
 
     ;
 
 
     Y.namespace('M.atto_aic').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
-        initializer: function () {
-            if(this.get('is_allowed')){
+        initializer: function() {
+            if (this.get('allowed')) {
             this.addButton({
                 callback: this._toggleMai,
                 icon: 'icon',
@@ -72,7 +72,7 @@ TEMPLATE = '' +
             });
         }
         },
-        _toggleMai: function () {
+        _toggleMai: function() {
             // Handle the button click here.
             // You can fetch any passed in parameters here as follows:
 
@@ -85,12 +85,12 @@ TEMPLATE = '' +
             dialogue.set('bodyContent', this._getDialogueContent());
             dialogue.show();
         },
-        _getDialogueContent: function () {
+        _getDialogueContent: function() {
             template = Y.Handlebars.compile(TEMPLATE);
 
             this._form = this._content = Y.Node.create(template({
                 component: COMPONENTNAME,
-                CSS: CSS
+                CSSSEL: CSSSEL
             }));
 
             this._currentSelection = this.get('host').getSelection();
@@ -98,27 +98,26 @@ TEMPLATE = '' +
             seltext = seltext.substr(0, seltext.length).slice(-1000);
             seltext = $.trim(seltext);
             if (seltext) {
-                this._form.one('.' + CSS.TEXTINPUT).set("value", seltext);
+                this._form.one('.' + CSSSEL.TEXTINPUT).set("value", seltext);
             }
 
-            this._form.one('.' + CSS.INPUTSUBMIT).on('click', this._generateText, this);
+            this._form.one('.' + CSSSEL.INPUTSUBMIT).on('click', this._generateText, this);
 
             return this._content;
         },
 
-        _generateText: function () {
-            // this._form.one('.' + CSS.INPUTSUBMIT).set("disabled",true);
-            var text = this._form.one('.' + CSS.TEXTINPUT).get('value');
+        _generateText: function() {
+            var text = this._form.one('.' + CSSSEL.TEXTINPUT).get('value');
             if (text.length < 3) {
-                this._form.one('.' + CSS.RESPONSE).setHTML("<div class='alert alert-danger'>"
-                +M.util.get_string('textlength', COMPONENTNAME)+"</div>");
+                this._form.one('.' + CSSSEL.RESPONSE).setHTML("<div class='alert alert-danger'>"
+                + M.util.get_string('textlength', COMPONENTNAME) + "</div>");
                 return;
             }
-            text = text.substr(0, text.length).slice(-1000); // intiall 1000 charcaters
-            this._form.one('.' + CSS.RESPONSE).setHTML("<i class='fa fa-spinner' aria-hidden='true'></i>");
+            text = text.substr(0, text.length).slice(-1000);
+            this._form.one('.' + CSSSEL.RESPONSE).setHTML("<i class='fa fa-spinner' aria-hidden='true'></i>");
 
-            $form_id = this._form.get('id');
-            $form_id = $('#' + $form_id);
+            $formid = this._form.get('id');
+            $formid = $('#' + $formid);
             ajaxurl = M.cfg.wwwroot + '/lib/editor/atto/plugins/aic/ajax.php';
             params = {
                 sesskey: M.cfg.sesskey,
@@ -132,58 +131,58 @@ TEMPLATE = '' +
                 timeout: 50000,
                 on: {
                     complete: this._loadContent,
-                    start: function () {
-                        $('.atto_aic_promptentrysubmit', $form_id).prop('disabled', true);
-                        $('.' + CSS.RESPONSE, $form_id).html(
+                    start: function() {
+                        $('.atto_aic_promptentrysubmit', $formid).prop('disabled', true);
+                        $('.' + CSSSEL.RESPONSE, $formid).html(
                             '<div class="spinner-grow text-success .aicspinner" role="status">'
-                            +'<span class="sr-only">Loading...</span></div>'
+                            + '<span class="sr-only">Loading...</span></div>'
                             + '<h4> Generating content ...</h4>'
 
                         );
                     },
-                    failure: function () {
-                        $('.' + CSS.RESPONSE, $form_id).html(
-                            '<div class="alert alert-danger" role="alert"> '+M.util.get_string('error',COMPONENTNAME)+'</div>'
+                    failure: function() {
+                        $('.' + CSSSEL.RESPONSE, $formid).html(
+                            '<div class="alert alert-danger" role="alert"> ' + M.util.get_string('error', COMPONENTNAME) + '</div>'
                         );
 
                     },
-                    end: function () {
-                        $('.aicspinner', $form_id).remove();
-                        $('.atto_aic_promptentrysubmit', $form_id).prop('disabled', false);
+                    end: function() {
+                        $('.aicspinner', $formid).remove();
+                        $('.atto_aic_promptentrysubmit', $formid).prop('disabled', false);
                     },
                 }
             });
 
         },
-        _loadContent: function (id, preview) {
+        _loadContent: function(id, preview) {
             if (preview.status == 200) {
-                self = this;
-                $form_id = this._form.get('id');
-                $form_id = $('#' + $form_id);
-                $('.atto_aic_response', $form_id).html(preview.response);
-                self.get("host").setSelection(this._currentSelection);
-                $('#inserttext1', $form_id).on('click', function () {
-                    self.get('host').insertContentAtFocusPoint($('.response', '#text1').text());
-                    self.markUpdated();
+                tself = this;
+                $formid = this._form.get('id');
+                $formid = $('#' + $formid);
+                $('.atto_aic_response', $formid).html(preview.response);
+                tself.get("host").setSelection(this._currentSelection);
+                $('#inserttext1', $formid).on('click', function() {
+                    tself.get('host').insertContentAtFocusPoint($('.response', '#text1').text());
+                    tself.markUpdated();
 
                 });
-                $('#inserttext2', $form_id).on('click', function () {
-                    self.get('host').insertContentAtFocusPoint($('.response', '#text2').text());
-                    self.markUpdated();
+                $('#inserttext2', $formid).on('click', function() {
+                    tself.get('host').insertContentAtFocusPoint($('.response', '#text2').text());
+                    tself.markUpdated();
 
                 });
-                $('#inserttext3', $form_id).on('click', function () {
-                    self.get('host').insertContentAtFocusPoint($('.response', '#text3').text());
-                    self.markUpdated();
+                $('#inserttext3', $formid).on('click', function() {
+                    tself.get('host').insertContentAtFocusPoint($('.response', '#text3').text());
+                    tself.markUpdated();
 
                 });
 
 
             }
         }
-    },{
+    }, {
         ATTRS: {
-            is_allowed:false
+            allowed: false
         }
     });
 

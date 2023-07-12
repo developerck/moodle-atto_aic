@@ -36,8 +36,5 @@ $action = required_param('action', PARAM_ALPHA);
 if ($action === 'get') {
     $text = required_param('text', PARAM_RAW);
     echo atto_aic\ai::generate_text($text);
-
     die();
 }
-
-print_error('invalidarguments');

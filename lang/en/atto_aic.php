@@ -62,5 +62,5 @@ $string['placeholder'] = 'Write about digital education';
 $string['buttonname'] = 'Generate Content';
 $string['textlength'] = 'Please write more than 3 character and not more then 1000 character';
 $string['error']  = 'We could not get content. You can try again!';
-$string['help'] = 'You can use selection from editor or write in text area. 
+$string['help'] = 'You can use selection from editor or write in text area.
 Maximum 1000 character and minimum 3 character';

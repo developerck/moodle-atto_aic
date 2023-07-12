@@ -23,31 +23,31 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
-defined('MOODLE_INTERNAL') || die();
-
-function atto_aic_params_for_js()
-{
+/**
+ * Sends the parameters to JS module.
+ *
+ * @return array
+ */
+function atto_aic_params_for_js() {
     global $USER;
-    // check if openapi key is available
+    // Check if openapi key is available.
     $key = get_config("atto_aic", "apikey");
     $roles = get_config("atto_aic", "allowed_role");
 
     $params = [];
-    $params['is_allowed'] = false;
+    $params['allowed'] = false;
 
     if ($key) {
         if (!empty($roles)) {
             $roles = explode(",", $roles);
-            // get user role
-            $user_roles = get_user_roles(\context_system::instance(), $USER->id);
-            $user_role_ids  = array_map(function ($k) {
+            // Get user role.
+            $userroles = get_user_roles(\context_system::instance(), $USER->id);
+            $userroleids  = array_map(function ($k) {
                 return $k->roleid;
-            }, $user_roles);
+            }, $userroles);
             foreach ($roles as $r) {
-               
-                if (in_array($r, $user_role_ids)) {
-                    $params['is_allowed'] = true;
+                if (in_array($r, $userroleids)) {
+                    $params['allowed'] = true;
                     break;
                 }
             }
@@ -56,8 +56,11 @@ function atto_aic_params_for_js()
     return $params;
 }
 
-function atto_aic_strings_for_js()
-{
+/**
+ * Initialise this plugin
+ * @param string $elementid
+ */
+function atto_aic_strings_for_js() {
     global $PAGE;
 
     $PAGE->requires->strings_for_js(

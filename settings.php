@@ -37,7 +37,7 @@ if ($hassiteconfig) {
             PARAM_TEXT
         ));
 
-        // get roles at system level
+        // Get roles at system level.
         $roles = get_all_roles(\context_system::instance());
         foreach ($roles as $role) {
             $roles[$role->id] = $role->shortname;
@@ -64,7 +64,7 @@ if ($hassiteconfig) {
 
             ]
         ));
-        // Advanced Settings //
+        // Advanced Settings.
 
         $settings->add(new admin_setting_heading(
             'atto_aic/advanced',
