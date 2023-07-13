@@ -45,7 +45,7 @@ class ai {
     /**
      *  Generate text based on input
      * @param string $text
-     * @return string 
+     * @return string
      */
     public static function generate_text($text) {
         global $CFG;
@@ -86,9 +86,8 @@ class ai {
 
     /**
      * format response
-     * @param array $response 
+     * @param array $response
      * @param int $choice
-     * 
      * @return string $html
      */
     private function format_response($response,  $choice) {
