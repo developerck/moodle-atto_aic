@@ -69,6 +69,7 @@ class ai {
             "presence_penalty" => (float) $presence,
 
         ];
+        require_once $CFG->libdir.'/filelib.php';
         $curl = new \curl();
         $curl->setopt(array(
             'CURLOPT_HTTPHEADER' => array(
