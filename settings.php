@@ -76,10 +76,11 @@ if ($hassiteconfig) {
             'atto_aic/model',
             get_string('model', 'atto_aic'),
             get_string('modeldesc', 'atto_aic'),
-            'text-davinci-003',
+            'gpt-3.5-turbo-instruct',
             [
 
                 'text-davinci-003' => 'text-davinci-003',
+                'gpt-3.5-turbo-instruct' => 'gpt-3.5-turbo-instruct',
 
             ]
         ));
