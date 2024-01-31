@@ -41,7 +41,7 @@ function atto_aic_params_for_js() {
         if (!empty($roles)) {
             $roles = explode(",", $roles);
             // Get user role.
-            $userroles = get_user_roles(\context_system::instance(), $USER->id);
+            $userroles = get_user_roles_with_special(\context_system::instance(), $USER->id);
             $userroleids  = array_map(function ($k) {
                 return $k->roleid;
             }, $userroles);
