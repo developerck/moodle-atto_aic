@@ -91,7 +91,7 @@ class ai {
      * @param int $choice
      * @return string $html
      */
-    private function format_response($response,  $choice) {
+    private static function format_response($response,  $choice) {
         $tab = [];
         $content = [];
         for ($i = 1; $i <= $choice; $i++) {
