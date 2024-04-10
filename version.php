@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'atto_aic';
-$plugin->release = '0.1.1';
+$plugin->release = '0.1.4';
 $plugin->version = 2023062202;
 $plugin->requires = 2020061500;
 $plugin->maturity = MATURITY_ALPHA;
