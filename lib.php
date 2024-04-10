@@ -36,6 +36,10 @@ function atto_aic_params_for_js() {
 
     $params = [];
     $params['allowed'] = false;
+    if(is_siteadmin() && get_config("atto_aic", "allowed_admin")){
+        $params['allowed']= true;
+        return $params;
+    }
 
     if ($key) {
         if (!empty($roles)) {

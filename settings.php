@@ -37,11 +37,21 @@ if ($hassiteconfig) {
             PARAM_TEXT
         ));
 
+        $settings->add(new admin_setting_configcheckbox(
+            'atto_aic/allowed_admin',
+            new lang_string('allowed_admin', 'atto_aic'),
+            new lang_string('allowed_admin_desc', 'atto_aic'),
+            '1'
+            
+        ));
+        
         // Get roles at system level.
         $roles = get_all_roles(\context_system::instance());
+        
         foreach ($roles as $role) {
             $roles[$role->id] = $role->shortname;
         }
+        
         $settings->add(new admin_setting_pickroles(
             'atto_aic/allowed_role',
             new lang_string('allowed_role', 'atto_aic'),
@@ -49,6 +59,8 @@ if ($hassiteconfig) {
             '',
             $roles
         ));
+
+   
 
 
         $settings->add(new admin_setting_configselect(

@@ -64,3 +64,5 @@ $string['textlength'] = 'Please write more than 3 character and not more then 10
 $string['error']  = 'We could not get content. You can try again!';
 $string['help'] = 'You can use selection from editor or write in text area.
 Maximum 1000 character and minimum 3 character';
+$string['allowed_admin'] = 'Allow to site admin';
+$string['allowed_admin_desc'] = '';
